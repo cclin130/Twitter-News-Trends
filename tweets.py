@@ -25,7 +25,7 @@ def extract():
     for tweet in tweepy.Cursor(api.search, hashtag, count = 100, lang="en", since_id=2017).items(): #get tweets containing the input hashtag
 
         s = str(str(tweet.text).translate(non_bmp_map).encode("utf-8"))
-        print(s) #print tweets
+        #print(s) #print tweets
         file.write(s)
         c = c + 1
 
