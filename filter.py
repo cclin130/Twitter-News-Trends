@@ -50,6 +50,12 @@ def filter (topic, fileName):
     for x in range(10):
         print(sortedList[x][0] + " " + str(sortedList[x][1]))
 
-    for x in range(20):
-        toWrite = sortedList[x][0] + " " + str(sortedList[x][1]) + "\n"
-        sortedTweets.write(toWrite)
+    for x in range(10):
+        words = sortedList[x][0] + " "
+        sortedTweets.write(words)
+
+    sortedTweets.write("\n")
+
+    for x in range(10):
+        number = str(sortedList[x][1]) + " "
+        sortedTweets.write(number)
