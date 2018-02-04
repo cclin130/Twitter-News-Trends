@@ -1,5 +1,3 @@
-file = open('tweets.txt', 'r')
-sortedTweets = open('sortedTweets.txt', 'w')
 wordList = [["", 0]]
 
 #function loops through line and calls check function on each word
@@ -40,17 +38,18 @@ def addWord(string):
             wordList.append([string, 1])
             #print(wordList[int(len(wordList)-1)][0] + " " + str(wordList[int(len(wordList)-1)][1]))
 
-#def filter (topic):
-topic = "memo"
+def filter (topic, fileName):
+    file = open(fileName, 'r')
+    sortedTweets = open('sortedTweets.txt', 'w')
 
-for line in file:
-    checkLine(line.lower(), topic)
+    for line in file:
+        checkLine(line.lower(), topic)
 
-sorted = sorted(wordList, key=lambda l:l[1], reverse=True)
+    sortedList = sorted(wordList, key=lambda l:l[1], reverse=True)
 
-for x in range(10):
-   print(sorted[x][0] + " " + str(sorted[x][1]))
+    for x in range(10):
+        print(sortedList[x][0] + " " + str(sortedList[x][1]))
 
-for x in range(10):
-    toWrite = sorted[x][0] + " " + str(sorted[x][1] + "\n")
-    sortedTweets.write(toWrite)
+    for x in range(20):
+        toWrite = sortedList[x][0] + " " + str(sortedList[x][1]) + "\n"
+        sortedTweets.write(toWrite)
