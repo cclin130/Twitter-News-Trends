@@ -13,14 +13,18 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 q  = input("Enter a hashtag: ")
+
 if (q[0] != "#"):
     q = "#" + str(q)
-    
+
+file = open("tweets.txt", "w")
 c = 0
+
 for tweet in tweepy.Cursor(api.search, q, count = 100, lang="en", since_id=2017).items(): #get tweets containing the input hashtag
-    
-    print(str(tweet.text).translate(non_bmp_map).encode('utf-8')) #print tweets
+
+    s = str(str(tweet.text).translate(non_bmp_map).encode('utf-8'))
+    print(s) #print tweets
+    file.write(s)
     c = c + 1
-    
     if (c == 500): # display the first 500 results
         break
