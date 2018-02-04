@@ -1,33 +1,33 @@
 file = open('tweets.txt', 'r')
-stopwords = open('stopWords.txt', 'r')
-newfile = open('wordCounts.txt', 'w')
+sortedTweets = open('sortedTweets.txt', 'w')
 wordList = [["", 0]]
 
 #function loops through line and calls check function on each word
-def checkLine(string):
-    #print(string)
+def checkLine(string, topic):
     temp = ""
     for x in range(0, len(string)):
         if (string[x] >= 'a' and string[x] <= 'z'):
           temp +=string[x]
         else:
-            if (temp != " "):
-                checkWord(temp)
+            if (temp != " " and temp != "" and temp != topic and len(temp)>2):
+                addWord(temp)
             temp = ""
 
-    if (temp != " "):
-        checkWord(temp)
+    if (temp != " " and temp != "" and temp != topic and len(temp)>2):
+        addWord(temp)
 
 #function checks each word against existing database
-def checkWord(string):
+def addWord(string):
+    stopwords = open('stopWords.txt', 'r')
     isNewString = True
     isStopWord = False
 
     #filter out stop words
     for line in stopwords:
-        if string == line:
-            isStopWord == True
-            #print(string)
+        #print(line.rstrip())
+        if string == line.rstrip():
+            isStopWord = True
+            break
 
     if isStopWord == False:
         # check if string is a new entry
@@ -38,8 +38,19 @@ def checkWord(string):
                 isNewString = False
         if isNewString == True:
             wordList.append([string, 1])
-            print(wordList[int(len(wordList)-1)][0] + " " + str(wordList[int(len(wordList)-1)][1]))
+            #print(wordList[int(len(wordList)-1)][0] + " " + str(wordList[int(len(wordList)-1)][1]))
 
-#----------------main---------------
+#def filter (topic):
+topic = "memo"
+
 for line in file:
-    checkLine(line.lower())
+    checkLine(line.lower(), topic)
+
+sorted = sorted(wordList, key=lambda l:l[1], reverse=True)
+
+for x in range(10):
+   print(sorted[x][0] + " " + str(sorted[x][1]))
+
+for x in range(10):
+    toWrite = sorted[x][0] + " " + str(sorted[x][1] + "\n")
+    sortedTweets.write(toWrite)

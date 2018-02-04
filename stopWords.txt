@@ -14,6 +14,7 @@ also
 although
 always
 among
+amp
 an
 and
 another
@@ -157,6 +158,7 @@ himself
 his
 how
 however
+https
 i
 if
 important
@@ -411,6 +413,9 @@ working
 works
 would
 x
+xef
+xbf
+xbd
 y
 year
 years
