@@ -12,15 +12,15 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
-q  = input("Enter a hashtag: ")
+topic  = input("Enter a hashtag: #")
 
-if (q[0] != "#"):
-    q = "#" + str(q)
+if (topic[0] != "#"):
+    topic = "#" + str(topic)
 
 file = open("tweets.txt", "w")
 c = 0
 
-for tweet in tweepy.Cursor(api.search, q, count = 100, lang="en", since_id=2017).items(): #get tweets containing the input hashtag
+for tweet in tweepy.Cursor(api.search, topic, count = 100, lang="en", since_id=2017).items(): #get tweets containing the input hashtag
 
     s = str(str(tweet.text).translate(non_bmp_map).encode('utf-8'))
     print(s) #print tweets
